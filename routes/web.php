@@ -163,3 +163,56 @@ Route::get('/cilindro/diametro/{raio}', function($raio){
     $retorno->resultado = 2 * $raio;
     return view('result', ['resultado' => $retorno]);
 });
+
+
+/* === CIRCULO === */
+
+Route::get('/circulo/perimetro/{opcao}/{valor}', function($opcao, $valor){
+    $retorno = new stdClass();
+    $retorno->forma = 'Círculo';
+    $retorno->calculo = 'Perímetro';
+    $retorno->opcao = $opcao;
+    $retorno->valor = $valor;
+    $retorno->resultado = null;
+    if($opcao == 'raio')
+        $retorno->resultado = 2 * pi() * $valor;
+    else if($opcao == 'diametro')
+        $retorno->resultado = pi() * $valor;
+    else
+        $retorno->opcao = 'Opcao de cálculo inválida';
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/circulo/area/{opcao}/{valor}', function($opcao, $valor){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cícrulo';
+    $retorno->calculo = 'Área';
+    $retorno->opcao = $opcao;
+    $retorno->valor = $valor;
+    $retorno->resultado = null;
+    if($opcao == 'raio')
+        $retorno->resultado = pi() * ($valor ** 2);
+    else if($opcao == 'diametro')
+        $retorno->resultado = (pi() * ($valor ** 2)) / 4;
+    else
+        $retorno->opcao = 'Opcao de cálculo inválida';
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/circulo/diametro/{raio}', function($raio){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cícrulo';
+    $retorno->calculo = 'Diâmetro';
+    $retorno->raio = $raio;
+    $retorno->resultado = 2 * $raio;
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/circulo/raio/{diametro}', function($diametro){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cícrulo';
+    $retorno->calculo = 'Raio';
+    $retorno->diametro = $diametro;
+    $retorno->resultado = $diametro / 2;
+    return view('result', ['resultado' => $retorno]);
+});
