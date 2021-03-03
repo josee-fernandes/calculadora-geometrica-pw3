@@ -38,3 +38,26 @@ Route::get('/losango/area/{lado}/{altura}', function($lado, $altura){
     $retorno->resultado = $lado * $altura;
     return view('result', ['resultado' => $retorno]);
 });
+
+
+/* === PARALELOGRAMO === */
+
+Route::get('/paralelogramo/perimetro/{ladoA}/{ladoB}', function($ladoA, $ladoB){
+    $retorno = new stdClass();
+    $retorno->forma = 'Paralelogramo';
+    $retorno->calculo = 'Perímetro';
+    $retorno->ladoA = $ladoA;
+    $retorno->ladoB = $ladoB;
+    $retorno->resultado = ($ladoA + $ladoB) * 2;
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/paralelogramo/area/{lado}/{altura}', function($lado, $altura){
+    $retorno = new stdClass();
+    $retorno->forma = 'Paralelogramo';
+    $retorno->calculo = 'Área';
+    $retorno->lado = $lado;
+    $retorno->altura = $altura;
+    $retorno->resultado = $lado * $altura;
+    return view('result', ['resultado' => $retorno]);
+});
