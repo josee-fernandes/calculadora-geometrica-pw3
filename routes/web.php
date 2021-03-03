@@ -105,3 +105,61 @@ Route::get('/retangulo/area/{ladoA}/{ladoB}', function($ladoA, $ladoB){
     $retorno->resultado = $ladoA * $ladoB;
     return view('result', ['resultado' => $retorno]);
 });
+
+
+/* === CILINDRO === */
+
+Route::get('/cilindro/volume/{raio}/{altura}', function($raio, $altura){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cilindro';
+    $retorno->calculo = 'Volume';
+    $retorno->raio = $raio;
+    $retorno->altura = $altura;
+    $retorno->resultado = pi() * ($raio ** 2) * $altura;
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/cilindro/area-base/{raio}', function($raio){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cilindro';
+    $retorno->calculo = 'Área da base';
+    $retorno->raio = $raio;
+    $retorno->resultado = pi() * ($raio ** 2);
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/cilindro/area-lateral/{raio}/{altura}', function($raio, $altura){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cilindro';
+    $retorno->calculo = 'Área lateral';
+    $retorno->raio = $raio;
+    $retorno->altura = $altura;
+    $retorno->resultado = 2 * pi() * $raio * $altura;
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/cilindro/area-superficie/{opcao}/{primeiroValor}/{segundoValor}', function($opcao, $primeiroValor, $segundoValor){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cilindro';
+    $retorno->calculo = 'Área da superfície';
+    $retorno->opcao = $opcao;
+    $retorno->primeiro_valor = $primeiroValor;
+    $retorno->segundo_valor = $segundoValor;
+    $retorno->resultado = null;
+    if($opcao == 'areas')
+        $retorno->resultado = 2 * ($primeiroValor + $segundoValor);
+    else if($opcao == 'raio-altura')
+        $retorno->resultado = 2 * pi() * $primeiroValor * ($primeiroValor + $segundoValor);
+    else
+        $retorno->opcao = 'Opcao de cálculo inválida';
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/cilindro/diametro/{raio}', function($raio){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cilindro';
+    $retorno->calculo = 'Diâmetro';
+    $retorno->raio = $raio;
+    $retorno->resultado = 2 * $raio;
+    return view('result', ['resultado' => $retorno]);
+});
