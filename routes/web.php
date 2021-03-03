@@ -82,3 +82,26 @@ Route::get('/quadrado/perimetro/{lado}', function($lado){
     $retorno->resultado = $lado ** 2;
     return view('result', ['resultado' => $retorno]);
 });
+
+
+/* === RETANGULO === */
+
+Route::get('/retangulo/perimetro/{ladoA}/{ladoB}', function($ladoA, $ladoB){
+    $retorno = new stdClass();
+    $retorno->forma = 'Retângulo';
+    $retorno->calculo = 'Perímetro';
+    $retorno->ladoA = $ladoA;
+    $retorno->ladoB = $ladoB;
+    $retorno->resultado = ($ladoA + $ladoB) * 2;
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/retangulo/area/{ladoA}/{ladoB}', function($ladoA, $ladoB){
+    $retorno = new stdClass();
+    $retorno->forma = 'Retangulo';
+    $retorno->calculo = 'Área';
+    $retorno->ladoA = $ladoA;
+    $retorno->ladoB = $ladoB;
+    $retorno->resultado = $ladoA * $ladoB;
+    return view('result', ['resultado' => $retorno]);
+});
