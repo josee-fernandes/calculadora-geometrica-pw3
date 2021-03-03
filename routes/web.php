@@ -61,3 +61,24 @@ Route::get('/paralelogramo/area/{lado}/{altura}', function($lado, $altura){
     $retorno->resultado = $lado * $altura;
     return view('result', ['resultado' => $retorno]);
 });
+
+
+/* === QUADRADO === */
+
+Route::get('/quadrado/perimetro/{lado}', function($lado){
+    $retorno = new stdClass();
+    $retorno->forma = 'Quadrado';
+    $retorno->calculo = 'Perímetro';
+    $retorno->lado = $lado;
+    $retorno->resultado = $lado * 4;
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/quadrado/perimetro/{lado}', function($lado){
+    $retorno = new stdClass();
+    $retorno->forma = 'Quadrado';
+    $retorno->calculo = 'Área';
+    $retorno->lado = $lado;
+    $retorno->resultado = $lado ** 2;
+    return view('result', ['resultado' => $retorno]);
+});
