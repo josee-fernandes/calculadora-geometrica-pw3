@@ -223,9 +223,48 @@ Route::get('/circulo/raio/{diametro}', function($diametro){
 Route::get('/elipse/area/{metadeEixoH}/{metadeEixoV}', function($metadeEixoH, $metadeExioV){
     $retorno = new stdClass();
     $retorno->forma = 'Elipse';
-    $retorno->calculo = 'Raio';
+    $retorno->calculo = 'Area';
     $retorno->metade_eixo_horizontal = $metadeEixoH;
     $retorno->metade_eixo_vertical = $metadeExioV;
     $retorno->resultado = pi() * $metadeEixoH * $metadeExioV;
+    return view('result', ['resultado' => $retorno]);
+});
+
+
+/* === ESFERA === */
+
+Route::get('/esfera/volume/{raio}', function($raio){
+    $retorno = new stdClass();
+    $retorno->forma = 'Esfera';
+    $retorno->calculo = 'Volume';
+    $retorno->raio = $raio;
+    $retorno->resultado = (4/3) * pi() * ($raio ** 3);
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/esfera/area/{raio}', function($raio){
+    $retorno = new stdClass();
+    $retorno->forma = 'Esfera';
+    $retorno->calculo = 'Área';
+    $retorno->raio = $raio;
+    $retorno->resultado = 4 * pi() * ($raio ** 2);
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/esfera/diametro/{raio}', function($raio){
+    $retorno = new stdClass();
+    $retorno->forma = 'Esfera';
+    $retorno->calculo = 'Diâmetro';
+    $retorno->raio = $raio;
+    $retorno->resultado = 2 * $raio;
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/esfera/raio/{diametro}', function($diametro){
+    $retorno = new stdClass();
+    $retorno->forma = 'Esfera';
+    $retorno->calculo = 'Raio';
+    $retorno->diametro = $diametro;
+    $retorno->resultado = $diametro / 2;
     return view('result', ['resultado' => $retorno]);
 });
