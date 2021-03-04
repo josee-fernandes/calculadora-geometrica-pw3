@@ -294,3 +294,56 @@ Route::get('/trapezio/area/{baseMaior}/{baseMenor}/{altura}', function($baseMaio
     $retorno->resultado = ($baseMaior + $baseMenor / 2) * $altura;
     return view('result', ['resultado' => $retorno]);
 });
+
+
+/* === TRIANGULO === */
+
+Route::get('/triangulo/perimetro/{ladoA}/{ladoB}/{ladoC}', function($ladoA, $ladoB, $ladoC){
+    $retorno = new stdClass();
+    $retorno->forma = 'Triângulo';
+    $retorno->calculo = 'Perímetro';
+    $retorno->lado_A = $ladoA;
+    $retorno->lado_B = $ladoB;
+    $retorno->lado_C = $ladoC;
+    $retorno->resultado = $ladoA + $ladoB + $ladoC;
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/triangulo/equilatero/area/{lado}', function($lado){
+    $retorno = new stdClass();
+    $retorno->forma = 'Triângulo equilátero';
+    $retorno->calculo = 'Área';
+    $retorno->lado = $lado;
+    $retorno->resultado = (sqrt(3) / 4) * ($lado ** 2);
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/triangulo/isosceles/area/{base}/{altura}', function($base, $altura){
+    $retorno = new stdClass();
+    $retorno->forma = 'Triângulo isósceles';
+    $retorno->calculo = 'Área';
+    $retorno->base = $base;
+    $retorno->altura = $altura;
+    $retorno->resultado = ($base * $altura) / 2;
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/triangulo/isosceles/altura/{lado}/{base}', function($lado, $base){
+    $retorno = new stdClass();
+    $retorno->forma = 'Triângulo isósceles';
+    $retorno->calculo = 'Altura';
+    $retorno->lado = $lado;
+    $retorno->base = $base;
+    $retorno->resultado = sqrt(($lado ** 2) - ($base ** 2));
+    return view('result', ['resultado' => $retorno]);
+});
+
+Route::get('/triangulo/retangulo/area/{base}/{altura}', function($base, $altura){
+    $retorno = new stdClass();
+    $retorno->forma = 'Triângulo retângulo';
+    $retorno->calculo = 'Área';
+    $retorno->base = $base;
+    $retorno->altura = $altura;
+    $retorno->resultado = ($base * $altura) / 2;
+    return view('result', ['resultado' => $retorno]);
+});
