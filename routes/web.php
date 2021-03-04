@@ -216,3 +216,16 @@ Route::get('/circulo/raio/{diametro}', function($diametro){
     $retorno->resultado = $diametro / 2;
     return view('result', ['resultado' => $retorno]);
 });
+
+
+/* === ELIPSE === */
+
+Route::get('/elipse/area/{metadeEixoH}/{metadeEixoV}', function($metadeEixoH, $metadeExioV){
+    $retorno = new stdClass();
+    $retorno->forma = 'Elipse';
+    $retorno->calculo = 'Raio';
+    $retorno->metade_eixo_horizontal = $metadeEixoH;
+    $retorno->metade_eixo_vertical = $metadeExioV;
+    $retorno->resultado = pi() * $metadeEixoH * $metadeExioV;
+    return view('result', ['resultado' => $retorno]);
+});
