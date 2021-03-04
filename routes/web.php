@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/laravel', function () {
+    return view('laravel');
 });
 
 
@@ -236,6 +240,32 @@ Route::get('/triangulo/retangulo/area/{base}/{altura}', function($base, $altura)
 });
 
 
+/* === TRAPEZIO === */
+
+Route::get('/trapezio/perimetro/{baseMaior}/{baseMenor}/{ladoA}/{ladoB}', function($baseMaior, $baseMenor, $ladoA, $ladoB){
+    $retorno = new stdClass();
+    $retorno->forma = 'Trapézio';
+    $retorno->calculo = 'Perímetro';
+    $retorno->base_maior = $baseMaior;
+    $retorno->base_menor = $baseMenor;
+    $retorno->lado_a = $ladoA;
+    $retorno->lado_b = $ladoB;
+    $retorno->resultado = $baseMaior + $baseMenor + $ladoA + $ladoB;
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+Route::get('/trapezio/area/{baseMaior}/{baseMenor}/{altura}', function($baseMaior, $baseMenor, $altura){
+    $retorno = new stdClass();
+    $retorno->forma = 'Trapézio';
+    $retorno->calculo = 'Área';
+    $retorno->base_maior = $baseMaior;
+    $retorno->base_menor = $baseMenor;
+    $retorno->altura = $altura;
+    $retorno->resultado = ($baseMaior + $baseMenor / 2) * $altura;
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+
 /* === CILINDRO === */
 
 Route::get('/cilindro/volume/{raio}/{altura}', function($raio, $altura){
@@ -329,31 +359,5 @@ Route::get('/esfera/raio/{diametro}', function($diametro){
     $retorno->calculo = 'Raio';
     $retorno->diametro = $diametro;
     $retorno->resultado = $diametro / 2;
-    return view('result', ['resultado' => json_encode($retorno)]);
-});
-
-
-/* === TRAPEZIO === */
-
-Route::get('/trapezio/perimetro/{baseMaior}/{baseMenor}/{ladoA}/{ladoB}', function($baseMaior, $baseMenor, $ladoA, $ladoB){
-    $retorno = new stdClass();
-    $retorno->forma = 'Trapézio';
-    $retorno->calculo = 'Perímetro';
-    $retorno->base_maior = $baseMaior;
-    $retorno->base_menor = $baseMenor;
-    $retorno->lado_a = $ladoA;
-    $retorno->lado_b = $ladoB;
-    $retorno->resultado = $baseMaior + $baseMenor + $ladoA + $ladoB;
-    return view('result', ['resultado' => json_encode($retorno)]);
-});
-
-Route::get('/trapezio/area/{baseMaior}/{baseMenor}/{altura}', function($baseMaior, $baseMenor, $altura){
-    $retorno = new stdClass();
-    $retorno->forma = 'Trapézio';
-    $retorno->calculo = 'Área';
-    $retorno->base_maior = $baseMaior;
-    $retorno->base_menor = $baseMenor;
-    $retorno->altura = $altura;
-    $retorno->resultado = ($baseMaior + $baseMenor / 2) * $altura;
     return view('result', ['resultado' => json_encode($retorno)]);
 });
