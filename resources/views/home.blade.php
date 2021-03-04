@@ -195,7 +195,7 @@
       <footer>
          <p>José Fernandes - 2021</p>
          <div>
-            <a href="https://github.com/josee-fernandes" target="__blank">GitHub</a> | <a href="https://linked.in/josee-fernandes" target="__blank">LinkedIn</a>
+            <a href="https://github.com/josee-fernandes" target="__blank">GitHub</a> | <a href="https://www.linkedin.com/in/josee-fernandes/s" target="__blank">LinkedIn</a>
          </div>
       </footer>
    </div>
