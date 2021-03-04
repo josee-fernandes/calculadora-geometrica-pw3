@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+:root{
+   --clr-primary: #5f2ada;
+   --clr-primary-lighter: #7951d8;
+   --clr-primary-shade: #4119a0;
+   --clr-light: #efefef;
+   --clr-shade: #e1e1e1;
+   --clr-dark: #1b1b1b;
+   --clr-dark-shade: #161616;
+   --clr-background-body: white;
+   --clr-background-shape: var(--clr-light);
+   --clr-link: var(--clr-dark);
+   --clr-link-hover: var(--clr-primary-lighter);
+   --font-size-title: 2rem;
+   --font-size-subtitle: 1.5rem;
+   --font-size-general: 1rem;
+   --font-weight-title: 700;
+   --font-weight-subtitle: 600;
+   --font-weight-general: 400;
+   --shapes-grid-columns: 1;
+}
+
+@mixin flex-center{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+@mixin title($color: var(--clr-dark-shade)){
+   font-size: var(--font-size-title);
+   font-weight: var(--font-weight-title);
+   color: $color;
+}
+
+@mixin subtitle($color: var(--clr-dark-shade)){
+   font-size: var(--font-size-subtitle);
+   font-weight: var(--font-weight-subtitle);
+   color: $color;
+}
+
+@mixin general-text($color: var(--clr-dark-shade)){
+   font-size: var(--font-size-general);
+   font-weight: var(--font-weight-general);
+}
+
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Source Sans Pro', sans-serif;
+
+   &::selection{
+      background-color: var(--clr-primary-shade);
+      color: white;
+   }
+}
+
+html, body{
+   width: 100vw;
+   min-height: 100vh;
+}
+
+body{
+   overflow-x: hidden;
+   display: flex;
+   justify-content: center;
+   background-color: var(--clr-background-body);
+   transition: all .3s ease;
+}
+
+h1{ @include title(); }
+
+h2{ @include subtitle(); }
+
+p{ @include general-text(); }
+
+a{
+   @include general-text();
+   color: var(--clr-link);
+   transition: all .2s ease;
+
+   &:hover{
+      color: var(--clr-link-hover)
+   }
+}
+
+.container{
+   @include flex-center();
+   flex-direction: column;
+   width: 80%;
+   max-width: 1150px;
+   padding: 1rem;
+}
+
+header{
+   padding: 2rem;
+
+   h1{
+      @include flex-center();
+      flex-direction: column;
+      text-transform: uppercase;
+      text-align: center;
+      letter-spacing: .2rem;
+      position: relative;
+
+      &:hover{
+         &::after{ width: 80%; }
+      }
+
+      &::after{
+         content: '';
+         margin-top: .5rem;
+         width: 50%;
+         height: 5px;
+         background-color: var(--clr-primary);
+         border-radius: 100px;
+         transition: all .4s ease;
+      }
+   }
+}
+
+.shapes{
+   margin-top: 2rem;
+   display: grid;
+   grid-template-columns: repeat(var(--shapes-grid-columns), 1fr);
+   gap: 2rem 0;
+   
+   .shape{
+      width: 100%;
+      justify-content: flex-start;
+      align-items: flex-start;
+      background-color: var(--clr-background-shape);
+      border-radius: 15px;
+      box-shadow: 0 10px 15px 0 rgba(black, .3);
+      transition: all .3s ease;
+
+      &:hover{
+         box-shadow: 0 20px 25px 0 rgba(black, .3);
+         transform: translateY(-10px);
+      }
+
+      .route-list{
+         list-style-type: none;
+         margin-top: 3.5rem;
+         display: flex;
+         flex-direction: column;
+         gap: 3rem 0;
+         
+         &__item{
+            h2{ color: var(--clr-primary-lighter); }
+
+            p{ margin-top: .8rem; }
+         }
+      }
+   }
+}
+
+footer{
+   @include flex-center();   
+   flex-direction: column;
+   text-align: center;
+   margin-top: 3rem;
+   padding: 2rem;
+}
+
+
+@media screen and (min-width: 768px){
+   :root{
+      --font-size-title: 2rem;
+      --font-size-subtitle: 1.5rem;
+      --font-size-general: 1rem;
+   }   
+
+   .shapes{
+      gap: 2rem;
+   }
+}
+
+@media screen and (min-width: 1024px){
+   :root{
+      --shapes-grid-columns: 2;
+   }
+
+   
+
+   .shapes{
+      .shape{
+         padding: 2rem;
+      }
+   }
+}
+
+@media (prefers-color-scheme: dark) {
+   :root{
+      --clr-background-shape: var(--clr-dark-shade);
+      --clr-background-body: var(--clr-dark);
+      --clr-link: var(--clr-light);
+      --font-size-title: 2rem;
+      --font-size-subtitle: 1.5rem;
+      --font-size-general: 1rem;
+   }
+
+   :is(h1, h2, p, footer){
+      color: var(--clr-light);
+   }
+
+   .shapes{
+      .shape{
+         .title{
+            @include title(var(--clr-primary-lighter));
+         }
+
+         .route-list{
+            &__item{
+               p{
+                  @include general-text(var(--clr-light));
+               }
+            }
+         }
+      }
+   }
+}
