@@ -26,7 +26,7 @@ Route::get('/losango/perimetro/{lado}/', function($lado){
     $retorno->calculo = 'Perímetro';
     $retorno->lado = $lado;
     $retorno->resultado = $lado * 4;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 Route::get('/losango/area/{lado}/{altura}', function($lado, $altura){
@@ -36,7 +36,7 @@ Route::get('/losango/area/{lado}/{altura}', function($lado, $altura){
     $retorno->lado = $lado;
     $retorno->altura = $altura;
     $retorno->resultado = $lado * $altura;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 
@@ -49,7 +49,7 @@ Route::get('/paralelogramo/perimetro/{ladoA}/{ladoB}', function($ladoA, $ladoB){
     $retorno->ladoA = $ladoA;
     $retorno->ladoB = $ladoB;
     $retorno->resultado = ($ladoA + $ladoB) * 2;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 Route::get('/paralelogramo/area/{lado}/{altura}', function($lado, $altura){
@@ -59,7 +59,7 @@ Route::get('/paralelogramo/area/{lado}/{altura}', function($lado, $altura){
     $retorno->lado = $lado;
     $retorno->altura = $altura;
     $retorno->resultado = $lado * $altura;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 
@@ -71,16 +71,16 @@ Route::get('/quadrado/perimetro/{lado}', function($lado){
     $retorno->calculo = 'Perímetro';
     $retorno->lado = $lado;
     $retorno->resultado = $lado * 4;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
-Route::get('/quadrado/perimetro/{lado}', function($lado){
+Route::get('/quadrado/area/{lado}', function($lado){
     $retorno = new stdClass();
     $retorno->forma = 'Quadrado';
     $retorno->calculo = 'Área';
     $retorno->lado = $lado;
     $retorno->resultado = $lado ** 2;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 
@@ -93,7 +93,7 @@ Route::get('/retangulo/perimetro/{ladoA}/{ladoB}', function($ladoA, $ladoB){
     $retorno->ladoA = $ladoA;
     $retorno->ladoB = $ladoB;
     $retorno->resultado = ($ladoA + $ladoB) * 2;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 Route::get('/retangulo/area/{ladoA}/{ladoB}', function($ladoA, $ladoB){
@@ -103,65 +103,7 @@ Route::get('/retangulo/area/{ladoA}/{ladoB}', function($ladoA, $ladoB){
     $retorno->ladoA = $ladoA;
     $retorno->ladoB = $ladoB;
     $retorno->resultado = $ladoA * $ladoB;
-    return view('result', ['resultado' => $retorno]);
-});
-
-
-/* === CILINDRO === */
-
-Route::get('/cilindro/volume/{raio}/{altura}', function($raio, $altura){
-    $retorno = new stdClass();
-    $retorno->forma = 'Cilindro';
-    $retorno->calculo = 'Volume';
-    $retorno->raio = $raio;
-    $retorno->altura = $altura;
-    $retorno->resultado = pi() * ($raio ** 2) * $altura;
-    return view('result', ['resultado' => $retorno]);
-});
-
-Route::get('/cilindro/area-base/{raio}', function($raio){
-    $retorno = new stdClass();
-    $retorno->forma = 'Cilindro';
-    $retorno->calculo = 'Área da base';
-    $retorno->raio = $raio;
-    $retorno->resultado = pi() * ($raio ** 2);
-    return view('result', ['resultado' => $retorno]);
-});
-
-Route::get('/cilindro/area-lateral/{raio}/{altura}', function($raio, $altura){
-    $retorno = new stdClass();
-    $retorno->forma = 'Cilindro';
-    $retorno->calculo = 'Área lateral';
-    $retorno->raio = $raio;
-    $retorno->altura = $altura;
-    $retorno->resultado = 2 * pi() * $raio * $altura;
-    return view('result', ['resultado' => $retorno]);
-});
-
-Route::get('/cilindro/area-superficie/{opcao}/{primeiroValor}/{segundoValor}', function($opcao, $primeiroValor, $segundoValor){
-    $retorno = new stdClass();
-    $retorno->forma = 'Cilindro';
-    $retorno->calculo = 'Área da superfície';
-    $retorno->opcao = $opcao;
-    $retorno->primeiro_valor = $primeiroValor;
-    $retorno->segundo_valor = $segundoValor;
-    $retorno->resultado = null;
-    if($opcao == 'areas')
-        $retorno->resultado = 2 * ($primeiroValor + $segundoValor);
-    else if($opcao == 'raio-altura')
-        $retorno->resultado = 2 * pi() * $primeiroValor * ($primeiroValor + $segundoValor);
-    else
-        $retorno->opcao = 'Opcao de cálculo inválida';
-    return view('result', ['resultado' => $retorno]);
-});
-
-Route::get('/cilindro/diametro/{raio}', function($raio){
-    $retorno = new stdClass();
-    $retorno->forma = 'Cilindro';
-    $retorno->calculo = 'Diâmetro';
-    $retorno->raio = $raio;
-    $retorno->resultado = 2 * $raio;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 
@@ -180,7 +122,7 @@ Route::get('/circulo/perimetro/{opcao}/{valor}', function($opcao, $valor){
         $retorno->resultado = pi() * $valor;
     else
         $retorno->opcao = 'Opcao de cálculo inválida';
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 Route::get('/circulo/area/{opcao}/{valor}', function($opcao, $valor){
@@ -196,7 +138,7 @@ Route::get('/circulo/area/{opcao}/{valor}', function($opcao, $valor){
         $retorno->resultado = (pi() * ($valor ** 2)) / 4;
     else
         $retorno->opcao = 'Opcao de cálculo inválida';
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 Route::get('/circulo/diametro/{raio}', function($raio){
@@ -205,7 +147,7 @@ Route::get('/circulo/diametro/{raio}', function($raio){
     $retorno->calculo = 'Diâmetro';
     $retorno->raio = $raio;
     $retorno->resultado = 2 * $raio;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 Route::get('/circulo/raio/{diametro}', function($diametro){
@@ -214,11 +156,21 @@ Route::get('/circulo/raio/{diametro}', function($diametro){
     $retorno->calculo = 'Raio';
     $retorno->diametro = $diametro;
     $retorno->resultado = $diametro / 2;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 
 /* === ELIPSE === */
+
+Route::get('/elipse/perimetro/{primeiroValor}/{segundoValor}', function($primeiroValor, $segundoValor){
+    $retorno = new stdClass();
+    $retorno->forma = 'Elipse';
+    $retorno->calculo = 'Area';
+    $retorno->primeiro_valor = $primeiroValor;
+    $retorno->segundo_valor = $segundoValor;
+    $retorno->resultado = pi() * (3 * ($primeiroValor + $segundoValor) - sqrt((3 * $primeiroValor + $segundoValor) * ($primeiroValor + 3 * $segundoValor)));
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
 
 Route::get('/elipse/area/{metadeEixoH}/{metadeEixoV}', function($metadeEixoH, $metadeExioV){
     $retorno = new stdClass();
@@ -227,7 +179,118 @@ Route::get('/elipse/area/{metadeEixoH}/{metadeEixoV}', function($metadeEixoH, $m
     $retorno->metade_eixo_horizontal = $metadeEixoH;
     $retorno->metade_eixo_vertical = $metadeExioV;
     $retorno->resultado = pi() * $metadeEixoH * $metadeExioV;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+
+/* === TRIANGULO === */
+
+Route::get('/triangulo/perimetro/{ladoA}/{ladoB}/{ladoC}', function($ladoA, $ladoB, $ladoC){
+    $retorno = new stdClass();
+    $retorno->forma = 'Triângulo';
+    $retorno->calculo = 'Perímetro';
+    $retorno->lado_A = $ladoA;
+    $retorno->lado_B = $ladoB;
+    $retorno->lado_C = $ladoC;
+    $retorno->resultado = $ladoA + $ladoB + $ladoC;
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+Route::get('/triangulo/equilatero/area/{lado}', function($lado){
+    $retorno = new stdClass();
+    $retorno->forma = 'Triângulo equilátero';
+    $retorno->calculo = 'Área';
+    $retorno->lado = $lado;
+    $retorno->resultado = (sqrt(3) / 4) * ($lado ** 2);
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+Route::get('/triangulo/isosceles/area/{base}/{altura}', function($base, $altura){
+    $retorno = new stdClass();
+    $retorno->forma = 'Triângulo isósceles';
+    $retorno->calculo = 'Área';
+    $retorno->base = $base;
+    $retorno->altura = $altura;
+    $retorno->resultado = ($base * $altura) / 2;
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+Route::get('/triangulo/isosceles/altura/{lado}/{base}', function($lado, $base){
+    $retorno = new stdClass();
+    $retorno->forma = 'Triângulo isósceles';
+    $retorno->calculo = 'Altura';
+    $retorno->lado = $lado;
+    $retorno->base = $base;
+    $retorno->resultado = sqrt(($lado ** 2) - ($base ** 2));
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+Route::get('/triangulo/retangulo/area/{base}/{altura}', function($base, $altura){
+    $retorno = new stdClass();
+    $retorno->forma = 'Triângulo retângulo';
+    $retorno->calculo = 'Área';
+    $retorno->base = $base;
+    $retorno->altura = $altura;
+    $retorno->resultado = ($base * $altura) / 2;
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+
+/* === CILINDRO === */
+
+Route::get('/cilindro/volume/{raio}/{altura}', function($raio, $altura){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cilindro';
+    $retorno->calculo = 'Volume';
+    $retorno->raio = $raio;
+    $retorno->altura = $altura;
+    $retorno->resultado = pi() * ($raio ** 2) * $altura;
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+Route::get('/cilindro/area-base/{raio}', function($raio){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cilindro';
+    $retorno->calculo = 'Área da base';
+    $retorno->raio = $raio;
+    $retorno->resultado = pi() * ($raio ** 2);
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+Route::get('/cilindro/area-lateral/{raio}/{altura}', function($raio, $altura){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cilindro';
+    $retorno->calculo = 'Área lateral';
+    $retorno->raio = $raio;
+    $retorno->altura = $altura;
+    $retorno->resultado = 2 * pi() * $raio * $altura;
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+Route::get('/cilindro/area-superficie/{opcao}/{primeiroValor}/{segundoValor}', function($opcao, $primeiroValor, $segundoValor){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cilindro';
+    $retorno->calculo = 'Área da superfície';
+    $retorno->opcao = $opcao;
+    $retorno->primeiro_valor = $primeiroValor;
+    $retorno->segundo_valor = $segundoValor;
+    $retorno->resultado = null;
+    if($opcao == 'areas')
+        $retorno->resultado = 2 * ($primeiroValor + $segundoValor);
+    else if($opcao == 'raio-altura')
+        $retorno->resultado = 2 * pi() * $primeiroValor * ($primeiroValor + $segundoValor);
+    else
+        $retorno->opcao = 'Opcao de cálculo inválida';
+    return view('result', ['resultado' => json_encode($retorno)]);
+});
+
+Route::get('/cilindro/diametro/{raio}', function($raio){
+    $retorno = new stdClass();
+    $retorno->forma = 'Cilindro';
+    $retorno->calculo = 'Diâmetro';
+    $retorno->raio = $raio;
+    $retorno->resultado = 2 * $raio;
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 
@@ -239,7 +302,7 @@ Route::get('/esfera/volume/{raio}', function($raio){
     $retorno->calculo = 'Volume';
     $retorno->raio = $raio;
     $retorno->resultado = (4/3) * pi() * ($raio ** 3);
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 Route::get('/esfera/area/{raio}', function($raio){
@@ -248,7 +311,7 @@ Route::get('/esfera/area/{raio}', function($raio){
     $retorno->calculo = 'Área';
     $retorno->raio = $raio;
     $retorno->resultado = 4 * pi() * ($raio ** 2);
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 Route::get('/esfera/diametro/{raio}', function($raio){
@@ -257,7 +320,7 @@ Route::get('/esfera/diametro/{raio}', function($raio){
     $retorno->calculo = 'Diâmetro';
     $retorno->raio = $raio;
     $retorno->resultado = 2 * $raio;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 Route::get('/esfera/raio/{diametro}', function($diametro){
@@ -266,7 +329,7 @@ Route::get('/esfera/raio/{diametro}', function($diametro){
     $retorno->calculo = 'Raio';
     $retorno->diametro = $diametro;
     $retorno->resultado = $diametro / 2;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 
@@ -281,7 +344,7 @@ Route::get('/trapezio/perimetro/{baseMaior}/{baseMenor}/{ladoA}/{ladoB}', functi
     $retorno->lado_a = $ladoA;
     $retorno->lado_b = $ladoB;
     $retorno->resultado = $baseMaior + $baseMenor + $ladoA + $ladoB;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
 
 Route::get('/trapezio/area/{baseMaior}/{baseMenor}/{altura}', function($baseMaior, $baseMenor, $altura){
@@ -292,58 +355,5 @@ Route::get('/trapezio/area/{baseMaior}/{baseMenor}/{altura}', function($baseMaio
     $retorno->base_menor = $baseMenor;
     $retorno->altura = $altura;
     $retorno->resultado = ($baseMaior + $baseMenor / 2) * $altura;
-    return view('result', ['resultado' => $retorno]);
-});
-
-
-/* === TRIANGULO === */
-
-Route::get('/triangulo/perimetro/{ladoA}/{ladoB}/{ladoC}', function($ladoA, $ladoB, $ladoC){
-    $retorno = new stdClass();
-    $retorno->forma = 'Triângulo';
-    $retorno->calculo = 'Perímetro';
-    $retorno->lado_A = $ladoA;
-    $retorno->lado_B = $ladoB;
-    $retorno->lado_C = $ladoC;
-    $retorno->resultado = $ladoA + $ladoB + $ladoC;
-    return view('result', ['resultado' => $retorno]);
-});
-
-Route::get('/triangulo/equilatero/area/{lado}', function($lado){
-    $retorno = new stdClass();
-    $retorno->forma = 'Triângulo equilátero';
-    $retorno->calculo = 'Área';
-    $retorno->lado = $lado;
-    $retorno->resultado = (sqrt(3) / 4) * ($lado ** 2);
-    return view('result', ['resultado' => $retorno]);
-});
-
-Route::get('/triangulo/isosceles/area/{base}/{altura}', function($base, $altura){
-    $retorno = new stdClass();
-    $retorno->forma = 'Triângulo isósceles';
-    $retorno->calculo = 'Área';
-    $retorno->base = $base;
-    $retorno->altura = $altura;
-    $retorno->resultado = ($base * $altura) / 2;
-    return view('result', ['resultado' => $retorno]);
-});
-
-Route::get('/triangulo/isosceles/altura/{lado}/{base}', function($lado, $base){
-    $retorno = new stdClass();
-    $retorno->forma = 'Triângulo isósceles';
-    $retorno->calculo = 'Altura';
-    $retorno->lado = $lado;
-    $retorno->base = $base;
-    $retorno->resultado = sqrt(($lado ** 2) - ($base ** 2));
-    return view('result', ['resultado' => $retorno]);
-});
-
-Route::get('/triangulo/retangulo/area/{base}/{altura}', function($base, $altura){
-    $retorno = new stdClass();
-    $retorno->forma = 'Triângulo retângulo';
-    $retorno->calculo = 'Área';
-    $retorno->base = $base;
-    $retorno->altura = $altura;
-    $retorno->resultado = ($base * $altura) / 2;
-    return view('result', ['resultado' => $retorno]);
+    return view('result', ['resultado' => json_encode($retorno)]);
 });
